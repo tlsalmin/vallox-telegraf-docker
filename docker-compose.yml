@@ -1,0 +1,21 @@
+version: '3'
+
+services:
+  vallox:
+    image: python:3.7-alpine
+    hostname: vallox
+    container_name: vallox
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      TZ: Europe/Helsinki
+      VALLOX_HOST: "${VALLOX_HOST}"
+      INFLUXDB_HOST: "${INFLUXDB_HOST}"
+      INFLUXDB_DB: "${INFLUXDB_DB}"
+      INFLUXDB_USER: "${INFLUXDB_USER}"
+      INFLUXDB_PASS: "${INFLUXDB_PASS}"
+    network_mode: bridge
+    dns:
+      - 10.1.0.1
+    restart: always
